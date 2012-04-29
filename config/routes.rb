@@ -1,7 +1,12 @@
 Gramlist::Application.routes.draw do
-  resources :users
   resources :sessions, only: [:new, :create, :destroy]
+  resources :relationships, only: [:create, :destroy]
   resources :gramposts, only: [:create, :destroy, :index]
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
 
   root to: 'static_pages#home'
   match '/signup',    to: 'users#new'
