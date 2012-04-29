@@ -2,6 +2,20 @@
 #
 # Table name: users
 #
+#  id              :integer         not null, primary key
+#  name            :string(255)
+#  email           :string(255)
+#  created_at      :datetime        not null
+#  updated_at      :datetime        not null
+#  password_digest :string(255)
+#  remember_token  :string(255)
+#  admin           :boolean         default(FALSE)
+#
+
+# == Schema Information
+#
+# Table name: users
+#
 #  id         :integer         not null, primary key
 #  name       :string(255)
 #  email      :string(255)
@@ -27,6 +41,7 @@ describe User do
   it { should respond_to(:remember_token) }
   it { should respond_to(:authenticate) }
   it { should respond_to(:admin) }
+  it { should respond_to(:gramposts) }
 
   it { should be_valid }
   it { should_not be_admin }
@@ -121,5 +136,38 @@ describe User do
   describe "remember token" do
     before { @user.save }
     its(:remember_token) { should_not be_blank }
+  end
+
+  describe "grampost associations" do
+
+    before { @user.save }
+    let!(:older_grampost) do 
+      FactoryGirl.create(:grampost, user: @user, created_at: 1.day.ago)
+    end
+    let!(:newer_grampost) do
+      FactoryGirl.create(:grampost, user: @user, created_at: 1.hour.ago)
+    end
+
+    it "should have the right gramposts in the right order" do
+      @user.gramposts.should == [newer_grampost, older_grampost]
+    end
+
+    it "should destroy associated gramposts" do
+      gramposts = @user.gramposts
+      @user.destroy
+      gramposts.each do |grampost|
+        Grampost.find_by_id(grampost.id).should be_nil
+      end
+    end
+
+    describe "status" do
+      let(:unfollowed_post) do
+        FactoryGirl.create(:grampost, user: FactoryGirl.create(:user))
+      end
+
+      its(:feed) { should include(newer_grampost) }
+      its(:feed) { should include(older_grampost) }
+      its(:feed) { should_not include(unfollowed_post) }
+    end
   end
 end

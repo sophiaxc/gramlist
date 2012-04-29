@@ -9,4 +9,10 @@ FactoryGirl.define do
       admin true
     end
   end
+
+  factory :grampost do
+    title "Post Title"
+    description "Lorem Ipsum"
+    user
+  end
 end

@@ -8,4 +8,13 @@
       </h1>
     </section>
   </aside>
+  <div class="span8">
+    <% if @user.gramposts.any? %>
+      <h3>Gramposts</h3>
+      <ol class="gramposts">
+        <%= render @gramposts %>
+      </ol>
+      <%= will_paginate @gramposts %>
+    <% end %>
+  </div>
 </div>

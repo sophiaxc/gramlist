@@ -96,10 +96,20 @@ describe "User pages" do
 
   describe "profile page" do
     let(:user) { FactoryGirl.create(:user) }
+    let!(:m1) { FactoryGirl.create(:grampost, user: user, description: "Ipsum", title: "Foo") }
+    let!(:m2) { FactoryGirl.create(:grampost, user: user, description: "Lorem", title: "Bar") }
+
     before { visit user_path(user) }
 
     it { should have_selector('h1',    text: user.name) }
     it { should have_selector('title', text: user.name) }
+
+    describe "gramposts" do
+      it { should have_content(m1.title) }
+      it { should have_content(m1.description) }
+      it { should have_content(m2.title) }
+      it { should have_content(m2.description) }
+    end
   end
 
   describe "signup" do

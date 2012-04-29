@@ -42,6 +42,22 @@ describe "AuthenticationPages" do
           it { should have_selector('title', text: 'Sign in') }
         end
       end
+
+      describe "in the Gramposts controller" do
+
+        describe "submitting to the create action" do
+          before { post gramposts_path }
+          specify { response.should redirect_to(signin_path) }
+        end
+
+        describe "submitting to the destroy action" do
+          before do
+            grampost = FactoryGirl.create(:grampost)
+            delete grampost_path(grampost)
+          end
+          specify { response.should redirect_to(signin_path) }
+        end
+      end
     end
 
     describe "as non-admin user" do
