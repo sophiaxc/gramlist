@@ -131,7 +131,7 @@ aside {
   }
 }
 
-.gravatar {
+.avatar {
   float: left;
   margin-right: 10px;
 }
@@ -160,7 +160,7 @@ aside {
 .user_avatars {
   overflow: auto;
   margin-top: 10px;
-  .gravatar {
+  .avatar {
     margin: 1px 1px;
   }
 }
@@ -238,7 +238,7 @@ input, textarea, select, .uneditable-input {
 .timestamp {
   color: $grayLight;
 }
-.gravatar {
+.avatar {
   float: left;
   margin-right: 10px;
 }

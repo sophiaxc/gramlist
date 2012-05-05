@@ -13,8 +13,12 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :name, :email, :password, :password_confirmation
+  attr_accessible :avatar, :name, :email, :password, :password_confirmation
   has_secure_password
+  has_attached_file :avatar,
+    :styles => { :medium => "300x300#", :thumb => "100x100#", :mini => "50x50#" },
+    :default_url => "/assets/no_avatar_:style.png"
+
   has_many :gramposts, dependent: :destroy
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :reverse_relationships, foreign_key: "followed_id",
@@ -26,6 +30,8 @@ class User < ActiveRecord::Base
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
 
+  validates_attachment :avatar, :content_type => { :content_type => ["image/jpg", "image/x-png"] },
+                                :size => { :in => 0..2.megabytes }
   validates :name, presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true,
