@@ -7,6 +7,9 @@
 # Ignore bundler config
 /.bundle
 
+# Ignore local environment files
+/.env
+
 # Ignore the default SQLite database.
 /db/*.sqlite3
 
@@ -16,4 +19,3 @@
 
 # Ignore local image files uploaded
 /public/system
-/paperclip

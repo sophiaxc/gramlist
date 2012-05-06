@@ -15,9 +15,22 @@
 class User < ActiveRecord::Base
   attr_accessible :avatar, :name, :email, :password, :password_confirmation
   has_secure_password
-  has_attached_file :avatar,
-    :styles => { :medium => "300x300#", :thumb => "100x100#", :mini => "50x50#" },
+  has_attached_file :avatar, {
+    :storage => :s3,
+    :bucket => ENV['S3_BUCKET_NAME'],
+    :s3_credentials => {
+      :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+    },
+    :styles => {
+      :medium => "300x300#",
+      :thumb => "100x100#",
+      :mini => "50x50#"
+    },
+    :path => "user/avatars/:id/:style/:hash.:extension",
+    :hash_secret => ENV['AVATAR_HASH'],
     :default_url => "/assets/no_avatar_:style.png"
+  }
 
   has_many :gramposts, dependent: :destroy
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
@@ -30,7 +43,8 @@ class User < ActiveRecord::Base
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
 
-  validates_attachment :avatar, :content_type => { :content_type => ["image/jpg", "image/x-png"] },
+  validates_attachment :avatar, :content_type => {
+    :content_type => ["image/jpg", "image/x-png", "image/jpeg", "image/png"] },
                                 :size => { :in => 0..2.megabytes }
   validates :name, presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
