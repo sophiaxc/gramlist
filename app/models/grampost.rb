@@ -9,12 +9,36 @@
 #  created_at  :datetime        not null
 #  updated_at  :datetime        not null
 #
+# Medium image: width = 250
+# Large image: width = 400
 
 class Grampost < ActiveRecord::Base
-  attr_accessible :title, :description
+  attr_accessible :title, :description, :photo, :price
   belongs_to :user
+  has_attached_file :photo, {
+    :storage => :s3,
+    :bucket => ENV['S3_BUCKET_NAME'],
+    :s3_credentials => {
+      :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+    },
+    :styles => {
+      :large => "400x",
+      :thumb => "250x",
+    },
+    :path => "grampost/photo/:id/:style/:hash.:extension",
+    :hash_secret => ENV['AVATAR_HASH'],
+    :default_url => "/assets/no_photo_:style.png"
+  }
 
+
+  validates_attachment :photo, presence: true,
+    :content_type => {
+        :content_type => ["image/jpg", "image/x-png", "image/jpeg", "image/png"] },
+        :size => { :in => 0..2.megabytes }
   validates :user_id, presence: true
+  validates :price, presence: true, :numericality => { :only_integer => true,
+                                                       :greater_than_or_equal_to => 0 }
   validates :title, presence: true, length: { maximum: 140 }
 
   default_scope order: 'gramposts.created_at DESC'

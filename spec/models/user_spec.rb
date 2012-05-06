@@ -158,6 +158,7 @@ describe User do
     end
 
     describe "status" do
+      let(:sample_photo)    { File.open('./app/assets/images/sample_data/grampost_test_photo.png') }
       let(:unfollowed_post) do
         FactoryGirl.create(:grampost, user: FactoryGirl.create(:user))
       end
@@ -165,7 +166,7 @@ describe User do
 
       before do
         @user.follow!(followed_user)
-        3.times { followed_user.gramposts.create!(title: "Lorem Ipsum") }
+        3.times { followed_user.gramposts.create!(title: "Lorem Ipsum", photo: sample_photo, price: 500) }
       end
 
       its(:feed) { should include(newer_grampost) }

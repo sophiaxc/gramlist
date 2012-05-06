@@ -8,7 +8,7 @@ class GrampostsController < ApplicationController
       flash[:success] = "Grampost created!"
       redirect_to root_path
     else
-      @feed_items = []
+      @feed_items = current_user.feed.paginate(page: params[:page])
       render 'static_pages/home'
     end
   end

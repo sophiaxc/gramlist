@@ -4,6 +4,13 @@ module GrampostsHelper
     sanitize(raw(description.split.map{ |s| wrap_long_string(s) }.join(' ')))
   end
 
+  # Returns the primary photo for the given grampost.
+  def photo_for(grampost, options = { size: :thumb})
+    # TODO: return different classes based on size option.
+    size = options[:size]
+    image_tag(grampost.photo.url(size), alt: grampost.title, class: "grampost_photo")
+  end
+
   private
 
     def wrap_long_string(text, max_width = 30)

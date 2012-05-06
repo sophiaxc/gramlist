@@ -16,12 +16,14 @@ describe Grampost do
 
   let(:user) { FactoryGirl.create(:user) }
   before do
-    # This code is wrong!
-    @grampost = user.gramposts.build(title: "Test Title", description: "Lorem ipsum")
+    photo = File.open('./app/assets/images/sample_data/grampost_test_photo.png')
+    @grampost = user.gramposts.build(title: "Test Title", description: "Lorem ipsum", photo: photo, price: 500)
   end
 
   subject { @grampost }
 
+  it { should respond_to(:photo) }
+  it { should respond_to(:price) }
   it { should respond_to(:title) }
   it { should respond_to(:description) }
   it { should respond_to(:user_id) }
@@ -42,6 +44,11 @@ describe Grampost do
     end
   end
 
+  describe "with blank photo" do
+    before { @grampost.photo = nil }
+    it { should_not be_valid }
+  end
+
   describe "with blank title" do
     before { @grampost.title = " " }
     it { should_not be_valid }
@@ -52,6 +59,21 @@ describe Grampost do
     it { should_not be_valid }
   end
 
+  describe "with negative price" do
+    before { @grampost.price = -100 }
+    it { should_not be_valid }
+  end
+
+  describe "with float price" do
+    before { @grampost.price = 100.0 }
+    it { should_not be_valid }
+  end
+
+  describe "with zero dollars for price" do
+    before { @grampost.price = 0 }
+    it { should be_valid }
+  end
+
   describe "from_users_followed_by" do
 
     let(:user)       { FactoryGirl.create(:user) }
@@ -60,9 +82,10 @@ describe Grampost do
 
     before { user.follow!(other_user) }
 
-    let(:own_post)        {       user.gramposts.create!(title: "foo") }
-    let(:followed_post)   { other_user.gramposts.create!(title: "bar") }
-    let(:unfollowed_post) { third_user.gramposts.create!(title: "baz") }
+    let(:sample_photo)    { File.open('./app/assets/images/sample_data/grampost_test_photo.png') }
+    let(:own_post)        {       user.gramposts.create!(title: "foo", photo: sample_photo, price: 500) }
+    let(:followed_post)   { other_user.gramposts.create!(title: "bar", photo: sample_photo, price: 500) }
+    let(:unfollowed_post) { third_user.gramposts.create!(title: "baz", photo: sample_photo, price: 500) }
 
     subject { Grampost.from_users_followed_by(user) }
 

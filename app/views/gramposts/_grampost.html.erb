@@ -1,6 +1,6 @@
 <li>
+  <%= photo_for grampost %>
   <span class="title"><%= grampost.title %></span>
-  <span class="content"><%= wrap(grampost.description) %></span>
   <span class="timestamp">
     Posted <%= time_ago_in_words(grampost.created_at) %> ago.
   </span>

@@ -25,6 +25,9 @@ describe "Grampost pages" do
     describe "with valid information" do
 
       before do
+        photo_path = './app/assets/images/sample_data/grampost_test_photo.png'
+        attach_file 'grampost_photo', photo_path
+        fill_in 'grampost_price', with: "30"
         fill_in 'grampost_title', with: "Grampost Title"
         fill_in 'grampost_description', with: "Lorem ipsum"
       end

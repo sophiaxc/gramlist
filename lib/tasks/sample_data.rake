@@ -25,11 +25,16 @@ def make_users
 end
 
 def make_gramposts
-  users = User.all(limit: 6)
-  50.times do
+  users = User.all(limit: 3)
+  15.times do
     title = Faker::Lorem.sentence(3)
     description = Faker::Lorem.sentence(7)
-    users.each { |user| user.gramposts.create!(title: title, description: description) }
+    photo = File.open('./app/assets/images/sample_data/grampost_test_photo.png')
+    price = Random.rand(1...10) * 100
+    users.each { |user| user.gramposts.create!(title: title,
+                                               description: description,
+                                               photo: photo,
+                                               price: price) }
   end
 end
 

@@ -1,6 +1,9 @@
 <%= form_for(@grampost) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
+    <%= f.label :photo, "Grampost Photo" %>
+    <%= f.file_field :photo %>
+    <%= f.text_field :price, placeholder: "How much?", min: 0 %>
     <%= f.text_field :title, placeholder: "Grampost title..." %>
     <%= f.text_area :description, placeholder: "Describe the details of your grampost..." %>
   </div>

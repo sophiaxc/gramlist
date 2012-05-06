@@ -11,14 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120505184949) do
+ActiveRecord::Schema.define(:version => 20120506220637) do
 
   create_table "gramposts", :force => true do |t|
     t.string   "title"
     t.string   "description"
     t.integer  "user_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.integer  "price"
   end
 
   add_index "gramposts", ["user_id", "created_at"], :name => "index_gramposts_on_user_id_and_created_at"

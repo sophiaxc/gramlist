@@ -95,8 +95,9 @@ describe "User pages" do
 
   describe "profile page" do
     let(:user) { FactoryGirl.create(:user) }
-    let!(:m1) { FactoryGirl.create(:grampost, user: user, description: "Ipsum", title: "Foo") }
-    let!(:m2) { FactoryGirl.create(:grampost, user: user, description: "Lorem", title: "Bar") }
+    let(:sample_photo)    { File.open('./app/assets/images/sample_data/grampost_test_photo.png') }
+    let!(:m1) { FactoryGirl.create(:grampost, user: user, description: "Ipsum", title: "Foo", photo: sample_photo, price: 30) }
+    let!(:m2) { FactoryGirl.create(:grampost, user: user, description: "Lorem", title: "Bar", photo: sample_photo, price: 40) }
 
     before { visit user_path(user) }
 
@@ -105,9 +106,7 @@ describe "User pages" do
 
     describe "gramposts" do
       it { should have_content(m1.title) }
-      it { should have_content(m1.description) }
       it { should have_content(m2.title) }
-      it { should have_content(m2.description) }
     end
 
     describe "follow/unfollow buttons" do
