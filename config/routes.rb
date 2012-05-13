@@ -1,7 +1,7 @@
 Gramlist::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :relationships, only: [:create, :destroy]
-  resources :gramposts, only: [:create, :destroy, :index]
+  resources :gramposts
   resources :users do
     member do
       get :following, :followers

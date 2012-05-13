@@ -1,5 +1,7 @@
 require 'spec_helper'
 
+# TODO(sophia): Add edit/show pages
+
 describe "Grampost pages" do
 
   subject { page }
@@ -8,7 +10,7 @@ describe "Grampost pages" do
   before { sign_in user }
 
   describe "grampost creation" do
-    before { visit root_path }
+    before { visit new_grampost_path }
 
     describe "with invalid information" do
 

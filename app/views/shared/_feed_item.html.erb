@@ -4,7 +4,9 @@
   <span class="user">
     <%= link_to feed_item.user.name, feed_item.user %>
   </span>
-  <span class="title"><%= feed_item.title %> for $<%= feed_item.price %></span>
+  <span class="title">
+    <%= link_to feed_item.title, feed_item %> for $<%= feed_item.price %>
+  </span>
   <span class="timestamp">
     Posted <%= time_ago_in_words(feed_item.created_at) %> ago.
   </span>
@@ -12,5 +14,6 @@
     <%= link_to "delete", feed_item, method:  :delete,
                                      confirm: "You sure?",
                                      title:   feed_item.title %>
+    <%= link_to "edit", edit_grampost_path(feed_item) %>
   <% end %>
 </li>

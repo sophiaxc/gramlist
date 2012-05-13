@@ -6,7 +6,8 @@
   </span>
   <% if current_user?(grampost.user) %>
     <%= link_to "delete", grampost, method:  :delete,
-                                     confirm: "You sure?",
-                                     title:   grampost.title %>
+                                    confirm: "You sure?",
+                                    title:   grampost.title %>
+    <%= link_to "edit", edit_grampost_path(grampost) %>
   <% end %>
 </li>

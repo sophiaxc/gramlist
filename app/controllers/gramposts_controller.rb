@@ -1,6 +1,27 @@
 class GrampostsController < ApplicationController
-  before_filter :signed_in_user, only: [:create, :destroy]
-  before_filter :correct_user, only: :destroy
+  before_filter :signed_in_user, only: [:create, :destroy, :new, :edit]
+  before_filter :correct_user, only: [:destroy, :edit]
+
+  def show
+    @grampost = Grampost.find(params[:id])
+  end
+
+  def edit
+  end
+
+  def update
+    @grampost = Grampost.find(params[:id])
+    if @grampost.update_attributes(params[:grampost])
+      flash[:success] = "Grampost updated"
+      redirect_to @grampost
+    else
+      render 'edit'
+    end
+  end
+
+  def new
+    @grampost = current_user.gramposts.new
+  end
 
   def create
     @grampost = current_user.gramposts.build(params[:grampost])
@@ -9,7 +30,7 @@ class GrampostsController < ApplicationController
       redirect_to root_path
     else
       @feed_items = current_user.feed.paginate(page: params[:page])
-      render 'static_pages/home'
+      render 'new'
     end
   end
 
