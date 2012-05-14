@@ -19,6 +19,10 @@ class GrampostsController < ApplicationController
     end
   end
 
+  def index
+    @feed_items = Grampost.paginate(page: params[:page])
+  end
+
   def new
     @grampost = current_user.gramposts.new
   end
@@ -37,9 +41,6 @@ class GrampostsController < ApplicationController
   def destroy
     @grampost.destroy
     redirect_back_or root_path
-  end
-
-  def index
   end
 
   private

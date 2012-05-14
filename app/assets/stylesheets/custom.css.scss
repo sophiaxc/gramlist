@@ -1,8 +1,17 @@
+/* Override bootstrap variables. */
+
+$navbarBackground: #536682;
+$navbarBackgroundHighlight: #597284;
+$navbarLinkColor: #ffffff;
+$linkColor: #536682;
+
 @import "bootstrap";
 
 /* mixins, variables, etc. */
 
 $grayMediumLight: #eaeaea;
+$backgroundBeige: #ebd1b0;
+$dropshadowColor: rgba(#636363, 0.5);
 
 @mixin box_sizing {
   -moz-box-sizing: border-box; 
@@ -18,6 +27,8 @@ html {
 
 body {
   padding-top: 60px;
+  background-color: $backgroundBeige;
+  background-image: url("/assets/bg_grid.png");
 }
 
 section {
@@ -68,15 +79,15 @@ p {
 #logo {
   float: left;
   margin-right: 10px;
+  margin-left: 0px;
   font-size: 1.7em;
-  color: black;
-  text-transform: uppercase;
+  color: white;
+  text-transform: capitalize;
   letter-spacing: -1px;
   padding-top: 9px;
-  font-weight: bold;
   line-height: 1;
   &:hover {
-    color: black;
+    color: white;
     text-decoration: none;
   }
 }
@@ -216,22 +227,71 @@ input, textarea, select, .uneditable-input {
 }
 
 /* gramposts */
+#create_button {
+  text-align: center;
+  margin: 10px auto;
+}
 
-.gramposts {
-  list-style: none;
-  margin: 10px 0 0 0;
+#gramposts {
+  text-align: center;
+  -moz-column-count: 3;
+  -moz-column-gap: 10px;
+  -moz-column-fill: auto;
+  -webkit-column-count: 3;
+  -webkit-column-gap: 10px;
+  -webkit-column-fill: auto;
+  column-count: 3;
+  column-gap: 15px;
+  column-fill: auto;
+}
 
-  li {
-    padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
-  }
+.grampost_preview {
+  -moz-column-break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  column-break-inside: avoid;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  display: inline-block;
+  width: 250px;
+  padding: 6px;
+  margin: 0 2px 15px;
+  background-color: white;
+  -moz-box-shadow:    0px 2px 4px 1px $dropshadowColor;
+  -webkit-box-shadow: 0px 2px 4px 1px $dropshadowColor;
+  box-shadow:         0px 2px 4px 1px $dropshadowColor;
+}
+
+.grampost_text {
+  width: 240px;
+  padding: 5px;
 }
 
 .title {
   display: block;
   font-weight: bold;
+/*  a {
+    float: left;
+    padding: 0 10px;
+    border-left: 1px solid $grayLighter;
+    color: gray;
+    &:first-child {
+      padding-left: 0;
+      border: 0;
+    }
+    &:hover {
+      text-decoration: none;
+      color: $blue;
+    } */
+  
 }
 .grampost_photo {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  -webkit-border-top-left-radius: 5px;
+  -moz-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-top-right-radius: 5px;
   display: block;
 }
 
