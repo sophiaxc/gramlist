@@ -9,7 +9,7 @@
 #  created_at  :datetime        not null
 #  updated_at  :datetime        not null
 #
-# Medium image: width = 250
+# Medium image: width = 300
 # Large image: width = 400
 
 class Grampost < ActiveRecord::Base
@@ -24,7 +24,7 @@ class Grampost < ActiveRecord::Base
     },
     :styles => {
       :large => "400x",
-      :thumb => "250x",
+      :thumb => "300x",
     },
     :path => "grampost/photo/:id/:style/:hash.:extension",
     :hash_secret => ENV['AVATAR_HASH'],
@@ -35,7 +35,7 @@ class Grampost < ActiveRecord::Base
   validates_attachment :photo, presence: true,
     :content_type => {
         :content_type => ["image/jpg", "image/x-png", "image/jpeg", "image/png"] },
-        :size => { :in => 0..2.megabytes }
+        :size => { :in => 0..4.megabytes }
   validates :user_id, presence: true
   validates :price, presence: true, :numericality => { :only_integer => true,
                                                        :greater_than_or_equal_to => 0 }

@@ -29,8 +29,9 @@ def make_gramposts
   15.times do
     title = Faker::Lorem.sentence(3)
     description = Faker::Lorem.sentence(7)
-    photo = File.open('./app/assets/images/sample_data/grampost_test_photo.png')
-    price = Random.rand(1...10) * 100
+    photo_index = (1..5).to_a.sample
+    photo = File.open("./app/assets/images/sample_data/sample_photo_#{photo_index}.jpeg")
+    price = (1..10).to_a.sample * 100
     users.each { |user| user.gramposts.create!(title: title,
                                                description: description,
                                                photo: photo,

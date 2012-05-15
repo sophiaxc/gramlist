@@ -10,7 +10,7 @@ $linkColor: #536682;
 /* mixins, variables, etc. */
 
 $grayMediumLight: #eaeaea;
-$backgroundBeige: #ebd1b0;
+$backgroundBeige: #EAD9C7;
 $dropshadowColor: rgba(#636363, 0.5);
 
 @mixin box_sizing {
@@ -253,7 +253,7 @@ input, textarea, select, .uneditable-input {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   display: inline-block;
-  width: 250px;
+  width: 300px;
   padding: 6px;
   margin: 0 2px 15px;
   background-color: white;
