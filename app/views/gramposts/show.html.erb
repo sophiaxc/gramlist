@@ -6,5 +6,21 @@
         <%= @grampost.title %>
         <%= photo_for @grampost %>
       </h1>
+    <span class="grampost_text">
+      <span class="title">
+        <%= link_to @grampost.title, @grampost %> for $<%= @grampost.price %>
+      </span>
+      <span class="timestamp">
+        Posted <%= time_ago_in_words(@grampost.created_at) %> ago
+        by  <%= link_to @grampost.user.name, @grampost.user %>.
+      </span>
+      <br>
+      <% if current_user?(@grampost.user) %>
+        <%= link_to "delete", @grampost, method:  :delete,
+                                        confirm: "You sure?",
+                                        title:   @grampost.title %> |
+        <%= link_to "edit", edit_grampost_path(@grampost) %>
+      <% end %>
+    </span>
   </div>
 </div>

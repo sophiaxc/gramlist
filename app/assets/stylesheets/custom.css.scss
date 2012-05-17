@@ -12,6 +12,7 @@ $linkColor: #536682;
 $grayMediumLight: #eaeaea;
 $backgroundBeige: #EAD9C7;
 $dropshadowColor: rgba(#636363, 0.5);
+$gramOrange: #DE6846;
 
 @mixin box_sizing {
   -moz-box-sizing: border-box; 
@@ -285,6 +286,38 @@ input, textarea, select, .uneditable-input {
     } */
   
 }
+
+.gram_image {
+   position: relative;
+   width: 100%; /* for IE 6 */
+}
+
+h2.price {
+   position: absolute;
+   top: 20px;
+   left: 0;
+}
+
+.ribbon {
+  font: bold 18px Helvetica, Sans-Serif;
+  letter-spacing: -1px;
+  background: white; /* fallback color */
+  padding: 5px 10px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -moz-border-bottom-right-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-top-right-radius: 5px;
+  -moz-box-shadow:    3px 2px 4px 1px $dropshadowColor;
+  -webkit-box-shadow: 3px 2px 4px 1px $dropshadowColor;
+  box-shadow:         3px 2px 4px 1px $dropshadowColor;
+  a {
+    text-decoration: none;
+    color: $gramOrange;
+  }
+}
+
 .grampost_photo {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
