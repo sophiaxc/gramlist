@@ -44,7 +44,7 @@ describe "Grampost pages" do
     before { FactoryGirl.create(:grampost, user: user) }
 
     describe "as correct user" do
-      before { visit root_path }
+      before { visit grampost_path(user.gramposts.first) }
 
       it "should delete a grampost" do
         expect { click_link "delete" }.should change(Grampost, :count).by(-1)

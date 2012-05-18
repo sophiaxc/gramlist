@@ -105,8 +105,8 @@ describe "User pages" do
     it { should have_selector('title', text: user.name) }
 
     describe "gramposts" do
-      it { should have_content(m1.title) }
-      it { should have_content(m2.title) }
+      it { should have_content(m1.price) }
+      it { should have_content(m2.price) }
     end
 
     describe "follow/unfollow buttons" do

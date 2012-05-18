@@ -250,17 +250,21 @@ input, textarea, select, .uneditable-input {
   -moz-column-break-inside: avoid;
   -webkit-column-break-inside: avoid;
   column-break-inside: avoid;
+  width: 300px;
+}
+
+.photo_frame {
+  padding: 6px;
+  margin: 0 2px 15px;
+  display: inline-block;
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
-  display: inline-block;
-  width: 300px;
-  padding: 6px;
-  margin: 0 2px 15px;
   background-color: white;
   -moz-box-shadow:    0px 2px 4px 1px $dropshadowColor;
   -webkit-box-shadow: 0px 2px 4px 1px $dropshadowColor;
   box-shadow:         0px 2px 4px 1px $dropshadowColor;
+
 }
 
 .grampost_text {
@@ -271,20 +275,6 @@ input, textarea, select, .uneditable-input {
 .title {
   display: block;
   font-weight: bold;
-/*  a {
-    float: left;
-    padding: 0 10px;
-    border-left: 1px solid $grayLighter;
-    color: gray;
-    &:first-child {
-      padding-left: 0;
-      border: 0;
-    }
-    &:hover {
-      text-decoration: none;
-      color: $blue;
-    } */
-  
 }
 
 .gram_image {
@@ -293,9 +283,9 @@ input, textarea, select, .uneditable-input {
 }
 
 h2.price {
-   position: absolute;
-   top: 20px;
-   left: 0;
+  position: absolute;
+  top: 20px;
+  left: 0;
 }
 
 .ribbon {

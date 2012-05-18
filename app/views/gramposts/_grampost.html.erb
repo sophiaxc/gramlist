@@ -1,9 +1,9 @@
-  <span class="grampost_preview" id="<%= grampost.id %>">
+  <span class="grampost_preview photo_frame" id="<%= grampost.id %>">
     <div class="gram_image">
         <%= link_to photo_for(grampost), grampost %>
         <h2 class="price">
           <span class="ribbon">
-            <%= link_to "$ #{grampost.price}", grampost %>
+            <%= link_to "$ %s" % number_with_delimiter(grampost.price, :delimiter => ','), grampost %>
           </span>
         </h2>
       </div>

@@ -22,7 +22,7 @@ describe "Static pages" do
 
       it "should render the user's feed" do
         user.feed.each do |item|
-          page.should have_selector("li##{item.id}", text: item.title)
+          page.should have_selector("span##{item.id}")
         end
       end
     end

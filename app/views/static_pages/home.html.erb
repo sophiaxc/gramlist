@@ -1,8 +1,5 @@
 <% if signed_in? %>
   <div class="row">
-      <section id="create_button">
-        <%= link_to "Create Grampost", new_grampost_path, class: "btn btn-large btn-primary" %>
-      </section>
       <%= render 'shared/feed' %>
   </div>
 <% else %>
