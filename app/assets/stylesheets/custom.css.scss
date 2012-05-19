@@ -26,10 +26,18 @@ html {
   overflow-y: scroll;
 }
 
+label {
+  font-weight: bold;
+}
+
 body {
   padding-top: 60px;
   background-color: $backgroundBeige;
   background-image: url("/assets/bg_grid.png");
+}
+
+.span410 {
+  width: 410px;
 }
 
 section {
@@ -254,6 +262,16 @@ input, textarea, select, .uneditable-input {
   position:relative;
 }
 
+.content_frame {
+  padding: 30px 15px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  background-color: white;
+  -moz-box-shadow:    0px 2px 4px 1px $dropshadowColor;
+  -webkit-box-shadow: 0px 2px 4px 1px $dropshadowColor;
+  box-shadow:         0px 2px 4px 1px $dropshadowColor;
+}
+
 .photo_frame {
   padding: 5px;
   margin: 0px 0px 10px 5px;
@@ -265,7 +283,6 @@ input, textarea, select, .uneditable-input {
   -moz-box-shadow:    0px 2px 4px 1px $dropshadowColor;
   -webkit-box-shadow: 0px 2px 4px 1px $dropshadowColor;
   box-shadow:         0px 2px 4px 1px $dropshadowColor;
-
 }
 
 .grampost_text {
@@ -276,6 +293,12 @@ input, textarea, select, .uneditable-input {
 .title {
   display: block;
   font-weight: bold;
+}
+
+#rightbar {
+  border-left: 1px solid #F4F4F4;
+  padding-left: 15px;
+  float: right;
 }
 
 .gram_image {
