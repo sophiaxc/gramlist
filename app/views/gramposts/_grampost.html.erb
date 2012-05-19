@@ -3,7 +3,7 @@
         <%= link_to photo_for(grampost), grampost %>
         <h2 class="price">
           <span class="ribbon">
-            <%= link_to "$ %s" % number_with_delimiter(grampost.price, :delimiter => ','), grampost %>
+            <%= link_to price_for(grampost), grampost %>
           </span>
         </h2>
       </div>

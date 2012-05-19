@@ -11,6 +11,16 @@ module GrampostsHelper
     image_tag(grampost.photo.url(size), alt: grampost.title, class: "grampost_photo")
   end
 
+  # Returns a comma delimited representation of the price.
+  # If the price is $0, return the word "FREE."
+  def price_for(grampost)
+    if grampost.price == 0
+      "FREE"
+    else
+      "$ %s" % number_with_delimiter(grampost.price, :delimiter => ',')
+    end
+  end
+
   private
 
     def wrap_long_string(text, max_width = 30)

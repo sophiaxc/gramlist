@@ -7,14 +7,13 @@
       </h1>
         <span class="photo_frame">
           <div class="gram_image">
-              <%= link_to photo_for(@grampost, size: :large), @grampost %>
-              <h2 class="price">
-                <span class="ribbon">
-                  <%= link_to "$ %s" % number_with_delimiter(
-                      @grampost.price, :delimiter => ','), @grampost %>
-                </span>
-              </h2>
-            </div>
+            <%= link_to photo_for(@grampost, size: :large), @grampost %>
+            <h2 class="price">
+              <span class="ribbon">
+                <%= link_to price_for(@grampost), @grampost %>
+              </span>
+            </h2>
+          </div>
         </span>
     <span class="grampost_text">
       <span class="timestamp">
