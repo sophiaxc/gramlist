@@ -236,13 +236,13 @@ input, textarea, select, .uneditable-input {
 #gramposts {
   text-align: center;
   -moz-column-count: 3;
-  -moz-column-gap: 10px;
+  -moz-column-gap: 5px;
   -moz-column-fill: auto;
   -webkit-column-count: 3;
-  -webkit-column-gap: 10px;
+  -webkit-column-gap: 5px;
   -webkit-column-fill: auto;
   column-count: 3;
-  column-gap: 15px;
+  column-gap: 5px;
   column-fill: auto;
 }
 
@@ -251,11 +251,12 @@ input, textarea, select, .uneditable-input {
   -webkit-column-break-inside: avoid;
   column-break-inside: avoid;
   width: 300px;
+  position:relative;
 }
 
 .photo_frame {
-  padding: 6px;
-  margin: 0 2px 15px;
+  padding: 5px;
+  margin: 0px 0px 10px 5px;
   display: inline-block;
   border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -288,7 +289,21 @@ h2.price {
   left: 0;
 }
 
+.photo_wrapper {
+  position: relative;
+}
+
+img.ribbon_corner {
+  position: absolute;
+  left: -5px;
+  top: 20px;
+  z-index: 10;
+}
+
 .ribbon {
+  border-top: 1px solid #d8d8d8;
+  border-right: 1px solid #d8d8d8;
+  border-bottom: 1px solid #d8d8d8;
   font: bold 18px Helvetica, Sans-Serif;
   letter-spacing: -1px;
   background: white; /* fallback color */
