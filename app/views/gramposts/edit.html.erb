@@ -9,10 +9,12 @@
         <div class="field">
           <%= f.label :photo, "Change Photo" %>
           <%= f.file_field :photo %>
-          <%= f.label :photo, "Change Price" %>
+          <%= f.label :price, "Change Price" %>
           <%= f.text_field :price, placeholder: "How much?", min: 0 %>
-          <%= f.label :photo, "Change Title" %>
+          <%= f.label :title, "Change Title" %>
           <%= f.text_field :title, placeholder: "Grampost title..." %>
+          <%= f.label :category_id, "Change Category" %>
+          <%= f.collection_select :category_id, Category.all, :id, :name %>
           <%= f.label :photo, "Change Description" %>
           <%= f.text_area :description, placeholder: "Describe the details of your grampost..." %>
         </div>

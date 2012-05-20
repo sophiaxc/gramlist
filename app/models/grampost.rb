@@ -13,8 +13,9 @@
 # Large image: width = 400
 
 class Grampost < ActiveRecord::Base
-  attr_accessible :title, :description, :photo, :price
+  attr_accessible :title, :description, :photo, :price, :category_id
   belongs_to :user
+  belongs_to :category
   has_attached_file :photo, {
     :storage => :s3,
     :bucket => ENV['S3_BUCKET_NAME'],
@@ -37,9 +38,11 @@ class Grampost < ActiveRecord::Base
         :content_type => ["image/jpg", "image/x-png", "image/jpeg", "image/png"] },
         :size => { :in => 0..4.megabytes }
   validates :user_id, presence: true
+  validates :category_id, presence: true
   validates :price, presence: true, :numericality => { :only_integer => true,
                                                        :greater_than_or_equal_to => 0 }
   validates :title, presence: true, length: { maximum: 140 }
+  validates :description, length: { maximum: 300 }
 
   default_scope order: 'gramposts.created_at DESC'
   scope :from_users_followed_by, lambda { |user| followed_by(user) }

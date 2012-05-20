@@ -166,7 +166,7 @@ describe User do
 
       before do
         @user.follow!(followed_user)
-        3.times { followed_user.gramposts.create!(title: "Lorem Ipsum", photo: sample_photo, price: 500) }
+        3.times { followed_user.gramposts.create!(title: "Lorem Ipsum", photo: sample_photo, price: 500, category_id: 0) }
       end
 
       its(:feed) { should include(newer_grampost) }

@@ -6,6 +6,9 @@ describe "Grampost pages" do
 
   subject { page }
 
+  let!(:category) do
+    Category.create!(name: "Awesome Cheese Graters")
+  end
   let(:user) { FactoryGirl.create(:user) }
   before { sign_in user }
 
@@ -32,6 +35,7 @@ describe "Grampost pages" do
         fill_in 'grampost_price', with: "30"
         fill_in 'grampost_title', with: "Grampost Title"
         fill_in 'grampost_description', with: "Lorem ipsum"
+        select category.name, :from => "grampost_category_id"
       end
 
       it "should create a grampost" do

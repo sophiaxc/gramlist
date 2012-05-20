@@ -27,6 +27,7 @@ end
 def make_gramposts
   users = User.all(limit: 3)
   15.times do
+    category - (1..5).to_a.sample
     title = Faker::Lorem.sentence(3)
     description = Faker::Lorem.sentence(7)
     photo_index = (1..5).to_a.sample
@@ -35,7 +36,8 @@ def make_gramposts
     users.each { |user| user.gramposts.create!(title: title,
                                                description: description,
                                                photo: photo,
-                                               price: price) }
+                                               price: price,
+                                               category_id: category) }
   end
 end
 

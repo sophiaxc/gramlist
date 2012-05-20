@@ -8,8 +8,10 @@
       <div class="field">
         <%= f.label :photo, "Choose A Photo" %>
         <%= f.file_field :photo %>
-        <%= f.text_field :price, placeholder: "(required) How much?", min: 0 %>
+        <%= f.text_field :price, placeholder: "(required) How much? Whole dollars only", min: 0 %>
         <%= f.text_field :title, placeholder: "(required) Grampost title..." %>
+          <%= f.collection_select :category_id, Category.all, :id, :name,
+                                  :prompt => '(required) Select Category' %>
         <%= f.text_area :description, placeholder: "(optional) Describe the details of your grampost..." %>
       </div>
       <%= f.submit "Post", class: "btn btn-large btn-primary" %>

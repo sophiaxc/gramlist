@@ -11,7 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120506220637) do
+ActiveRecord::Schema.define(:version => 20120520214950) do
+
+  create_table "categories", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "gramposts", :force => true do |t|
     t.string   "title"
@@ -24,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20120506220637) do
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
     t.integer  "price"
+    t.integer  "category_id"
   end
 
   add_index "gramposts", ["user_id", "created_at"], :name => "index_gramposts_on_user_id_and_created_at"
