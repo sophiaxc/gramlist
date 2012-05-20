@@ -312,6 +312,13 @@ h2.price {
   left: 0;
 }
 
+.grampost_price {
+  text-decoration: none;
+  color: $gramOrange;
+  font: bold 1.6em Helvetica, Sans-Serif;
+  text-align: right;
+}
+
 .photo_wrapper {
   position: relative;
 }

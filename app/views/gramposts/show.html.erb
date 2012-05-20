@@ -1,32 +1,41 @@
 <%= provide(:title, @grampost.title) %>
 
-<div class="row">
-  <div class="span6 offset3">
-      <h1>
+<div class="row content_frame">
+  <aside class="span6" id="rightbar">
+    <section>
+      <h1 class="grampost_title">
         <%= @grampost.title %>
       </h1>
-        <span class="photo_frame">
-          <div class="gram_image">
-            <%= link_to photo_for(@grampost, size: :large), @grampost %>
-            <h2 class="price">
-              <span class="ribbon">
-                <%= link_to price_for(@grampost), @grampost %>
-              </span>
-            </h2>
-          </div>
+      <p>
+        <span class="timestamp">
+          Posted <%= time_ago_in_words(@grampost.created_at) %> ago
+          by  <%= link_to @grampost.user.name, @grampost.user %>.
         </span>
-    <span class="grampost_text">
-      <span class="timestamp">
-        Posted <%= time_ago_in_words(@grampost.created_at) %> ago
-        by  <%= link_to @grampost.user.name, @grampost.user %>.
-      </span>
-      <br>
-      <% if current_user?(@grampost.user) %>
+      </p>
+      <p class="grampost_price">
+        <%= price_for(@grampost) %>
+      </p>
+    </section>
+    <% if not @grampost.description.blank? %>
+      <section>
+        <p>
+          <%= @grampost.description %>
+        </p>
+      </section>
+    <% end %>
+    <% if current_user?(@grampost.user) %>
+      <section>
         <%= link_to "delete", @grampost, method:  :delete,
-                                        confirm: "You sure?",
-                                        title:   @grampost.title %> |
+                                         confirm: "You sure?",
+                                         title:   @grampost.title %> |
         <%= link_to "edit", edit_grampost_path(@grampost) %>
-      <% end %>
-    </span>
+      </section>
+    <% end %>
+  </aside>
+
+  <div class="span410">
+      <div class="gram_image">
+        <%= link_to photo_for(@grampost, size: :large), @grampost %>
+      </div>
   </div>
 </div>
