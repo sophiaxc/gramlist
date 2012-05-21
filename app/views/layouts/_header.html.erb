@@ -5,7 +5,8 @@
       <nav>
         <ul class="nav pull-right">
           <li><%= link_to "New Grampost",new_grampost_path %></li>
-          <li><%= link_to " Home",    root_path %></li>
+          <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to "Categories", categories_path %></li>
           <% if signed_in? %>
             <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">

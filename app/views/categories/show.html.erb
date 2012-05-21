@@ -1,0 +1,11 @@
+<% if @feed_items.any? %>
+<div class="row">
+    <%= render 'shared/feed' %>
+</div>
+<% else %>
+  <div class="row">
+    <div class="span6 offset3 content_frame">
+      <h2>No posts found for <%= @category.name %> :'(</h2>
+    </div>
+  </div>
+<% end %>

@@ -235,6 +235,19 @@ input, textarea, select, .uneditable-input {
   }
 }
 
+ /* categories index */
+
+.categories {
+  list-style: none;
+  margin: 0;
+  li {
+    text-align: center;
+    font: bold 1.6em Helvetica, Sans-Serif;
+    overflow: auto;
+    padding: 10px 0;
+  }
+}
+
 /* gramposts */
 #create_button {
   text-align: center;
