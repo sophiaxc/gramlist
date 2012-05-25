@@ -101,6 +101,14 @@ p {
   }
 }
 
+ul.nav li.dropdown:hover ul.dropdown-menu{
+    display: block;
+}
+
+.navbar .dropdown-menu {
+ margin-top: 0px;
+}
+
 /* footer */
 
 footer {
@@ -232,19 +240,6 @@ input, textarea, select, .uneditable-input {
     &:last-child {
       border-bottom: 1px solid $grayLighter;
     }
-  }
-}
-
- /* categories index */
-
-.categories {
-  list-style: none;
-  margin: 0;
-  li {
-    text-align: center;
-    font: bold 1.6em Helvetica, Sans-Serif;
-    overflow: auto;
-    padding: 10px 0;
   }
 }
 
