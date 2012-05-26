@@ -11,6 +11,9 @@
           Posted <%= time_ago_in_words(@grampost.created_at) %> ago
           by  <%= link_to @grampost.user.name, @grampost.user %>.
         </span>
+        <span class="timestamp">
+          <%= @grampost.city %>, <%= @grampost.state %>
+        </span>
       </p>
       <p class="grampost_price">
         <%= price_for(@grampost) %>

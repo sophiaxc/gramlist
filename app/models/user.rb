@@ -26,6 +26,8 @@ class User < ActiveRecord::Base
                   :password_confirmation, :zipcode
 
   # Geocoding a user
+  # TODO(sophia): This is hella ghetto. Should refactor location data
+  # from user and grampost into single model.
   geocoded_by :zipcode
   after_validation :geocode
   reverse_geocoded_by :latitude, :longitude do |obj,results|

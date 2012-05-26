@@ -24,7 +24,7 @@ class GrampostsController < ApplicationController
   end
 
   def new
-    @grampost = current_user.gramposts.new
+    @grampost = current_user.gramposts.new(zipcode: current_user.zipcode)
   end
 
   def create

@@ -13,6 +13,7 @@ FactoryGirl.define do
 
   factory :grampost do
     title "Post Title"
+    zipcode "94114"
     category_id 0
     description "Lorem Ipsum"
     sequence(:price)  { |n| n*100 }

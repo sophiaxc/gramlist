@@ -20,7 +20,22 @@
 # Large image: width = 400
 
 class Grampost < ActiveRecord::Base
-  attr_accessible :title, :description, :photo, :price, :category_id
+  attr_accessible :title, :description, :photo, :price, :category_id,
+                  :zipcode
+
+  # Geocoding a grampost
+  # TODO(sophia): This is hella ghetto. Should refactor location data
+  # from user and grampost into single model.
+  geocoded_by :zipcode
+  after_validation :geocode
+  reverse_geocoded_by :latitude, :longitude do |obj,results|
+    if geo = results.first
+      obj.city = geo.city
+      obj.state = geo.state
+    end
+  end
+  after_validation :reverse_geocode
+
   belongs_to :user
   belongs_to :category
   has_attached_file :photo, {
@@ -50,6 +65,10 @@ class Grampost < ActiveRecord::Base
                                                        :greater_than_or_equal_to => 0 }
   validates :title, presence: true, length: { maximum: 140 }
   validates :description, length: { maximum: 300 }
+  VALID_ZIPCODE_REGEX = /^\d{5}(-\d{4})?$/
+  validates :zipcode, presence: true,
+                      format: { with: VALID_ZIPCODE_REGEX,
+                                message: "should be in the form 12345 or 12345-1234"}
 
   default_scope order: 'gramposts.created_at DESC'
   scope :from_users_followed_by, lambda { |user| followed_by(user) }

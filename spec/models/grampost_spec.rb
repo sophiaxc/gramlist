@@ -23,7 +23,7 @@ describe Grampost do
   let(:user) { FactoryGirl.create(:user) }
   before do
     photo = File.open('./app/assets/images/sample_data/grampost_test_photo.png')
-    @grampost = user.gramposts.build(title: "Test Title", description: "Lorem ipsum", photo: photo, price: 500, category_id: 0)
+    @grampost = user.gramposts.build(title: "Test Title", description: "Lorem ipsum", photo: photo, price: 500, category_id: 0, zipcode: "94114")
   end
 
   subject { @grampost }
@@ -31,12 +31,18 @@ describe Grampost do
   it { should respond_to(:photo) }
   it { should respond_to(:price) }
   it { should respond_to(:title) }
+  it { should respond_to(:zipcode) }
   it { should respond_to(:description) }
   it { should respond_to(:user_id) }
   it { should respond_to(:category_id) }
   its(:user) { should == user }
 
   it { should be_valid }
+
+  describe "when zipcode is not present" do
+    before { @grampost.zipcode = " " }
+    it { should_not be_valid }
+  end
 
   describe "when category_id is not present" do
     before { @grampost.category_id = nil }
@@ -95,9 +101,9 @@ describe Grampost do
     before { user.follow!(other_user) }
 
     let(:sample_photo)    { File.open('./app/assets/images/sample_data/grampost_test_photo.png') }
-    let(:own_post)        {       user.gramposts.create!(title: "foo", photo: sample_photo, price: 500, category_id: 0) }
-    let(:followed_post)   { other_user.gramposts.create!(title: "bar", photo: sample_photo, price: 500, category_id: 0) }
-    let(:unfollowed_post) { third_user.gramposts.create!(title: "baz", photo: sample_photo, price: 500, category_id: 0) }
+    let(:own_post)        {       user.gramposts.create!(title: "foo", photo: sample_photo, price: 500, category_id: 0, zipcode: "94114") }
+    let(:followed_post)   { other_user.gramposts.create!(title: "bar", photo: sample_photo, price: 500, category_id: 0, zipcode: "94114") }
+    let(:unfollowed_post) { third_user.gramposts.create!(title: "baz", photo: sample_photo, price: 500, category_id: 0, zipcode: "94114") }
 
     subject { Grampost.from_users_followed_by(user) }
 
