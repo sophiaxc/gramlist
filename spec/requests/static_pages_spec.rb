@@ -12,17 +12,29 @@ describe "Static pages" do
     it { should_not have_selector 'title', text: '| Home' }
 
     describe "for signed-in users" do
-      let(:user) { FactoryGirl.create(:user) }
+      let(:user) { FactoryGirl.create(:user, zipcode: "94114") }
       before do
-        FactoryGirl.create(:grampost, user: user, title: "Lorem ipsum")
-        FactoryGirl.create(:grampost, user: user, title: "Dolor sit amet")
+        FactoryGirl.create(:grampost, user: user, title: "Lorem ipsum",
+                                      zipcode: "94114")
+        FactoryGirl.create(:grampost, user: user, title: "Dolor sit amet",
+                                      zipcode: "94114")
         sign_in user
         visit root_path
       end
 
       it "should render the user's feed" do
         user.feed.each do |item|
-          page.should have_selector("span##{item.id}")
+          page.should have_selector("div##{item.id}")
+        end
+      end
+
+      describe "showing only local items" do
+        let (:non_local_item) { FactoryGirl.create(:grampost, user: user,
+                                                   title: "Lorem ipsum",
+                                                   zipcode: "90210") }
+        before { visit root_path }
+        it "should not render non local items" do
+          page.should_not have_selector("div##{non_local_item.id}")
         end
       end
     end
