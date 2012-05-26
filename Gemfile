@@ -9,6 +9,7 @@ gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.5'
 gem 'paperclip', '~> 3.0'
 gem 'aws-sdk'
+gem 'geocoder'
 
 group :development do
   gem 'annotate', '~> 2.4.1.beta'

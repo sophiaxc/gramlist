@@ -76,10 +76,12 @@ describe "User pages" do
 
     describe "with valid information" do
       let(:new_name)  { "New Name" }
+      let(:new_zipcode)  { "90210" }
       let(:new_email) { "new@example.com" }
       before do
         fill_in "Name",             with: new_name
         fill_in "Email",            with: new_email
+        fill_in "Zipcode",          with: new_zipcode
         fill_in "Password",         with: user.password
         fill_in "Confirm Password", with: user.password
         click_button "Save changes"
@@ -176,6 +178,7 @@ describe "User pages" do
       before do
         fill_in "Name",         with: "Example User"
         fill_in "Email",        with: "user@example.com"
+        fill_in "Zipcode",      with: "94114"
         fill_in "Password",     with: "foobar"
         fill_in "Confirmation", with: "foobar"
       end

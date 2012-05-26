@@ -2,13 +2,20 @@
 #
 # Table name: gramposts
 #
-#  id          :integer         not null, primary key
-#  title       :string(255)
-#  description :string(255)
-#  user_id     :integer
-#  created_at  :datetime        not null
-#  updated_at  :datetime        not null
+#  id                 :integer         not null, primary key
+#  title              :string(255)
+#  description        :string(255)
+#  user_id            :integer
+#  created_at         :datetime        not null
+#  updated_at         :datetime        not null
+#  photo_file_name    :string(255)
+#  photo_content_type :string(255)
+#  photo_file_size    :integer
+#  photo_updated_at   :datetime
+#  price              :integer
+#  category_id        :integer
 #
+
 # Medium image: width = 300
 # Large image: width = 400
 

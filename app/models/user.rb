@@ -2,18 +2,40 @@
 #
 # Table name: users
 #
-#  id              :integer         not null, primary key
-#  name            :string(255)
-#  email           :string(255)
-#  created_at      :datetime        not null
-#  updated_at      :datetime        not null
-#  password_digest :string(255)
-#  remember_token  :string(255)
-#  admin           :boolean         default(FALSE)
+#  id                  :integer         not null, primary key
+#  name                :string(255)
+#  email               :string(255)
+#  created_at          :datetime        not null
+#  updated_at          :datetime        not null
+#  password_digest     :string(255)
+#  remember_token      :string(255)
+#  admin               :boolean         default(FALSE)
+#  avatar_file_name    :string(255)
+#  avatar_content_type :string(255)
+#  avatar_file_size    :integer
+#  avatar_updated_at   :datetime
+#  zipcode             :string(255)
+#  latitude            :float
+#  longitude           :float
+#  city                :string(255)
+#  state               :string(255)
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :avatar, :name, :email, :password, :password_confirmation
+  attr_accessible :avatar, :name, :email, :password,
+                  :password_confirmation, :zipcode
+
+  # Geocoding a user
+  geocoded_by :zipcode
+  after_validation :geocode
+  reverse_geocoded_by :latitude, :longitude do |obj,results|
+    if geo = results.first
+      obj.city = geo.city
+      obj.state = geo.state
+    end
+  end
+  after_validation :reverse_geocode
+
   has_secure_password
   has_attached_file :avatar, {
     :storage => :s3,
@@ -53,6 +75,10 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
   validates :password, length: { minimum: 6 }
   validates :password_confirmation, presence: true
+  VALID_ZIPCODE_REGEX = /^\d{5}(-\d{4})?$/
+  validates :zipcode, presence: true,
+                      format: { with: VALID_ZIPCODE_REGEX,
+                                message: "should be in the form 12345 or 12345-1234"}
 
   def feed
     Grampost.from_users_followed_by(self)

@@ -2,14 +2,23 @@
 #
 # Table name: users
 #
-#  id              :integer         not null, primary key
-#  name            :string(255)
-#  email           :string(255)
-#  created_at      :datetime        not null
-#  updated_at      :datetime        not null
-#  password_digest :string(255)
-#  remember_token  :string(255)
-#  admin           :boolean         default(FALSE)
+#  id                  :integer         not null, primary key
+#  name                :string(255)
+#  email               :string(255)
+#  created_at          :datetime        not null
+#  updated_at          :datetime        not null
+#  password_digest     :string(255)
+#  remember_token      :string(255)
+#  admin               :boolean         default(FALSE)
+#  avatar_file_name    :string(255)
+#  avatar_content_type :string(255)
+#  avatar_file_size    :integer
+#  avatar_updated_at   :datetime
+#  zipcode             :string(255)
+#  latitude            :float
+#  longitude           :float
+#  city                :string(255)
+#  state               :string(255)
 #
 
 require 'spec_helper'
@@ -18,13 +27,15 @@ describe User do
 
   before do
     @user = User.new(name: "Example User", email: "user@example.com",
-                    password: "foobar", password_confirmation: "foobar")
+                    password: "foobar", password_confirmation: "foobar",
+                    zipcode: "94114")
   end
 
   subject { @user }
 
   it { should respond_to(:avatar) }
   it { should respond_to(:name) }
+  it { should respond_to(:zipcode) }
   it { should respond_to(:email) }
   it { should respond_to(:password_digest) }
   it { should respond_to(:password) }
@@ -47,6 +58,11 @@ describe User do
     before { @user.toggle!(:admin) }
 
     it { should be_admin }
+  end
+
+  describe "when zipcode is not present" do
+    before { @user.zipcode = " " }
+    it { should_not be_valid }
   end
 
   describe "when name is not present" do
