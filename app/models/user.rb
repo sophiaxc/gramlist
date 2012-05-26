@@ -23,7 +23,8 @@
 
 class User < ActiveRecord::Base
   attr_accessible :avatar, :name, :email, :password,
-                  :password_confirmation, :zipcode
+                  :password_confirmation, :zipcode,
+                  :search_distance
 
   # Geocoding a user
   # TODO(sophia): This is hella ghetto. Should refactor location data
@@ -81,6 +82,10 @@ class User < ActiveRecord::Base
   validates :zipcode, presence: true,
                       format: { with: VALID_ZIPCODE_REGEX,
                                 message: "should be in the form 12345 or 12345-1234"}
+  validates :search_distance, presence: true,
+            :numericality => { :only_integer => true,
+                               :greater_than => 0,
+                               :less_than_or_equal_to => 50 }
 
   def feed
     Grampost.from_users_followed_by(self)

@@ -28,7 +28,7 @@ describe User do
   before do
     @user = User.new(name: "Example User", email: "user@example.com",
                     password: "foobar", password_confirmation: "foobar",
-                    zipcode: "94114")
+                    zipcode: "94114", search_distance: 20)
   end
 
   subject { @user }
@@ -36,6 +36,7 @@ describe User do
   it { should respond_to(:avatar) }
   it { should respond_to(:name) }
   it { should respond_to(:zipcode) }
+  it { should respond_to(:search_distance) }
   it { should respond_to(:email) }
   it { should respond_to(:password_digest) }
   it { should respond_to(:password) }

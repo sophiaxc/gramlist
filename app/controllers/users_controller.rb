@@ -47,7 +47,8 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.new
+    # Default search distance to 20
+    @user = User.new(search_distance: 20)
   end
 
   def create
