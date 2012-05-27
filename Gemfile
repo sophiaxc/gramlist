@@ -10,6 +10,10 @@ gem 'bootstrap-will_paginate', '0.0.5'
 gem 'paperclip', '~> 3.0'
 gem 'aws-sdk'
 gem 'geocoder'
+gem 'instagram', '0.8.4'
+# Set faraday version due to new version imcompatibility with
+# instagram.
+gem 'faraday', '0.7.6'
 
 group :development do
   gem 'annotate', '~> 2.4.1.beta'

@@ -48,7 +48,12 @@ class UsersController < ApplicationController
 
   def new
     # Default search distance to 20
-    @user = User.new(search_distance: 20)
+    if session[:access_token]
+      client = Instagram.client(:access_token => session[:access_token])
+      @instagram_user = client.user
+    end
+    @user = User.new(search_distance: 20,
+                     instagram_token: session[:access_token])
   end
 
   def create

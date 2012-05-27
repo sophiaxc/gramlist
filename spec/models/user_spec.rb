@@ -38,6 +38,7 @@ describe User do
   it { should respond_to(:zipcode) }
   it { should respond_to(:search_distance) }
   it { should respond_to(:email) }
+  it { should respond_to(:instagram_token) }
   it { should respond_to(:password_digest) }
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }

@@ -24,7 +24,7 @@
 class User < ActiveRecord::Base
   attr_accessible :avatar, :name, :email, :password,
                   :password_confirmation, :zipcode,
-                  :search_distance
+                  :search_distance, :instagram_token
 
   # Geocoding a user
   # TODO(sophia): This is hella ghetto. Should refactor location data
